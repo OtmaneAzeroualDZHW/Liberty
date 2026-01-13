@@ -29,8 +29,9 @@ app.mount("/static", StaticFiles(directory="assets"), name="static")
 # Wegen Render musste ich das hier verwenden:
 # Tesseract Pfad auf Render
 # --- Tesseract + Poppler Pfade für Render ---
-pytesseract.pytesseract.tesseract_cmd = "./tools/tesseract/tesseract.exe"
-POPPLER_PATH = "./tools/poppler/bin"
+pytesseract.pytesseract.tesseract_cmd = os.path.join(os.getcwd(), "Tesseract-OCR", "tesseract.exe")
+POPPLER_PATH = os.path.join(os.getcwd(), "poppler-25.11.0", "Library", "bin")
+
 # ---------------------------------------------------------
 # FELDER
 # ---------------------------------------------------------
