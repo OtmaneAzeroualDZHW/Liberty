@@ -21,10 +21,16 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="assets"), name="static")
 
 # --- Pfade zu Tesseract und Poppler (anpassen falls nötig) ---
-pytesseract.pytesseract.tesseract_cmd = r"C:\Users\Otman\Tesseract-OCR\tesseract.exe"
-os.environ['TESSDATA_PREFIX'] = r"C:\Users\Otman\Tesseract-OCR\tessdata"
-POPPLER_PATH = r"C:\Users\Otman\poppler-25.11.0\Library\bin"
+#pytesseract.pytesseract.tesseract_cmd = r"C:\Users\Otman\Tesseract-OCR\tesseract.exe"
+#os.environ['TESSDATA_PREFIX'] = r"C:\Users\Otman\Tesseract-OCR\tessdata"
+#POPPLER_PATH = r"C:\Users\Otman\poppler-25.11.0\Library\bin"
 
+
+# Wegen Render musste ich das hier verwenden:
+# Tesseract Pfad auf Render
+pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
+# Poppler Pfad für pdf2image
+POPPLER_PATH = "/usr/bin"
 # ---------------------------------------------------------
 # FELDER
 # ---------------------------------------------------------
@@ -340,7 +346,8 @@ async def extract_form(file: UploadFile = File(...)):
 
     # PDF oder Bild
     if file.filename.lower().endswith(".pdf"):
-        images = convert_from_bytes(img_bytes, dpi=150, poppler_path=POPPLER_PATH)
+        #Wegen Render habe ich diese Zeile auskommentiert...
+     images = convert_from_bytes(img_bytes, dpi=150, poppler_path=POPPLER_PATH)
     else:
         images = [Image.open(BytesIO(img_bytes))]
 
