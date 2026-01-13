@@ -1,14 +1,13 @@
 #!/bin/bash
+# Update Paketlisten
+sudo apt-get update
 
-# Update Paketliste
-apt-get update
+# Installiere Poppler (für PDF-Konvertierung)
+sudo apt-get install -y poppler-utils
 
-# Installiere Tesseract-OCR
-apt-get install -y tesseract-ocr
+# Installiere Tesseract OCR
+sudo apt-get install -y tesseract-ocr
 
-# Installiere Poppler (für pdf2image)
-apt-get install -y poppler-utils
-
-# Installiere Python-Abhängigkeiten
-pip install -r requirements.txt
+# Optional: Deutsche Sprache für Tesseract
+sudo apt-get install -y tesseract-ocr-deu
 
