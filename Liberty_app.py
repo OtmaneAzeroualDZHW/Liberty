@@ -30,8 +30,10 @@ app.mount("/static", StaticFiles(directory="assets"), name="static")
 # Tesseract Pfad auf Render
 # --- Tesseract + Poppler Pfade für Render ---
 # Linux Standardpfade
-pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
-POPPLER_PATH = None  # pdf2image nutzt automatisch poppler-utils
+pytesseract.pytesseract.tesseract_cmd = r"./Tesseract-OCR/tesseract.exe"
+os.environ['TESSDATA_PREFIX'] = r"./Tesseract-OCR/tessdata"
+
+POPPLER_PATH = r"./poppler-25.11.0/Library/bin"
 
 # ---------------------------------------------------------
 # FELDER
