@@ -29,8 +29,9 @@ app.mount("/static", StaticFiles(directory="assets"), name="static")
 # Wegen Render musste ich das hier verwenden:
 # Tesseract Pfad auf Render
 # --- Tesseract + Poppler Pfade für Render ---
-pytesseract.pytesseract.tesseract_cmd = os.path.join(os.getcwd(), "Tesseract-OCR", "tesseract.exe")
-POPPLER_PATH = os.path.join(os.getcwd(), "poppler-25.11.0", "Library", "bin")
+# Linux Standardpfade
+pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
+POPPLER_PATH = None  # pdf2image nutzt automatisch poppler-utils
 
 # ---------------------------------------------------------
 # FELDER
