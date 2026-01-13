@@ -13,6 +13,7 @@ import base64
 import json
 import zipfile
 from typing import List
+import platform
 
 # ---------------------------------------------------------
 # APP + STATIC
@@ -30,10 +31,13 @@ app.mount("/static", StaticFiles(directory="assets"), name="static")
 # Tesseract Pfad auf Render
 # --- Tesseract + Poppler Pfade für Render ---
 # Linux Standardpfade
-pytesseract.pytesseract.tesseract_cmd = r"./Tesseract-OCR/tesseract.exe"
-os.environ['TESSDATA_PREFIX'] = r"./Tesseract-OCR/tessdata"
-
-POPPLER_PATH = r"./poppler-25.11.0/Library/bin"
+if platform.system() == "Windows":
+    pytesseract.pytesseract.tesseract_cmd = r"C:\Users\Otman\Tesseract-OCR\tesseract.exe"
+    POPPLER_PATH = r"C:\Users\Otman\poppler-25.11.0\Library\bin"
+else:
+    # Auf Linux/Render
+    pytesseract.pytesseract.tesseract_cmd = "tesseract"
+    POPPLER_PATH = None  # pdf2image nutzt dann automatisch poppler-utils aus PATH
 
 # ---------------------------------------------------------
 # FELDER
