@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
-
-# Update System
+# Install Tesseract OCR + Poppler auf Render-Linux
 apt-get update
+apt-get install -y tesseract-ocr poppler-utils
 
-# Poppler installieren (für pdf2image)
-apt-get install -y poppler-utils
-
-# Tesseract OCR installieren
-apt-get install -y tesseract-ocr tesseract-ocr-deu tesseract-ocr-eng
-
-# Python-Abhängigkeiten installieren
+# Installiere Python-Abhängigkeiten
 pip install -r requirements.txt
+
