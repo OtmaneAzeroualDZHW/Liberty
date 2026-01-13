@@ -28,9 +28,13 @@ app.mount("/static", StaticFiles(directory="assets"), name="static")
 
 # Wegen Render musste ich das hier verwenden:
 # Tesseract Pfad auf Render
-pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
-# Poppler Pfad für pdf2image
-POPPLER_PATH = "/usr/bin"
+# --- Tesseract + Poppler Pfade für Render ---
+if os.name == "nt":  # Windows
+    pytesseract.pytesseract.tesseract_cmd = r"C:\Users\Otman\Tesseract-OCR\tesseract.exe"
+    POPPLER_PATH = r"C:\Users\Otman\poppler-25.11.0\Library\bin"
+else:  # Linux (Render)
+    pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
+    POPPLER_PATH = "/usr/bin"  # Poppler binaries
 # ---------------------------------------------------------
 # FELDER
 # ---------------------------------------------------------
@@ -346,7 +350,6 @@ async def extract_form(file: UploadFile = File(...)):
 
     # PDF oder Bild
     if file.filename.lower().endswith(".pdf"):
-        #Wegen Render habe ich diese Zeile auskommentiert...
      images = convert_from_bytes(img_bytes, dpi=150, poppler_path=POPPLER_PATH)
     else:
         images = [Image.open(BytesIO(img_bytes))]
